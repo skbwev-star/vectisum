@@ -1,0 +1,50 @@
+---
+interface Node {
+  question: string;
+  yes: string;
+  no: string;
+}
+interface Props {
+  nodes: Node[];
+}
+const { nodes } = Astro.props as Props;
+---
+<div class="tree">
+  {nodes.map((n, i) => (
+    <div class="tree-node">
+      <div class="tree-q">
+        <span class="tree-q-num">{String(i + 1).padStart(2, '0')}</span>
+        <p>{n.question}</p>
+      </div>
+      <div class="tree-branches">
+        <div class="tree-branch tree-branch--yes">
+          <span class="branch-label">Yes</span>
+          <p>{n.yes}</p>
+        </div>
+        <div class="tree-branch tree-branch--no">
+          <span class="branch-label">No</span>
+          <p>{n.no}</p>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .tree { display: flex; flex-direction: column; gap: 2px; }
+  .tree-node { border: 1px solid var(--rule); background: var(--paper); margin-bottom: 14px; }
+  .tree-q { display: flex; gap: 14px; padding: 18px 20px; border-bottom: 1px solid var(--rule); background: var(--stone); align-items: baseline; }
+  .tree-q-num { font-family: var(--font-mono); font-size: 11px; color: var(--muted-2); flex-shrink: 0; }
+  .tree-q p { font-family: var(--font-display); font-weight: 600; font-size: 15.5px; }
+  .tree-branches { display: grid; grid-template-columns: 1fr 1fr; }
+  .tree-branch { padding: 16px 20px; }
+  .tree-branch--yes { border-right: 1px solid var(--rule); border-left: 3px solid var(--signal-pass); }
+  .tree-branch--no { border-left: 3px solid var(--signal-fail); }
+  .branch-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-2); display: block; margin-bottom: 6px; }
+  .tree-branch p { font-size: 13.5px; line-height: 1.5; color: var(--muted); }
+
+  @media (max-width: 640px) {
+    .tree-branches { grid-template-columns: 1fr; }
+    .tree-branch--yes { border-right: none; border-bottom: 1px solid var(--rule); }
+  }
+</style>

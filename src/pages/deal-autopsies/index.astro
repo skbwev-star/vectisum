@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import DealCard from '../../components/DealCard.astro';
+import { deals } from '../../data/deals';
+---
+<Layout
+  title="Deal Autopsies"
+  description="A public library of anonymised deal autopsies — where the numbers stopped adding up, and what the evidence showed instead."
+  path="/deal-autopsies"
+>
+  <section class="hero-simple">
+    <div class="container">
+      <span class="eyebrow">Deal Autopsies</span>
+      <h1>Where the numbers stopped adding up.</h1>
+      <p class="hero-sub text-muted">
+        A running, anonymised record of completed reviews — published as evidence of the patterns that recur across markets,
+        not as marketing for any single deal.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="deal-grid">
+        {deals.map((d) => <DealCard {...d} />)}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero-simple { padding: 64px 0 48px; border-bottom: 1px solid var(--rule); }
+  .hero-simple h1 { font-size: clamp(30px, 4.5vw, 46px); margin: 16px 0 18px; max-width: 22ch; }
+  .hero-sub { font-size: 16px; max-width: 58ch; line-height: 1.6; }
+  .deal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 980px) { .deal-grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,195 @@
+/* ============================================================
+   VECTISUM — Design tokens
+   Institutional research aesthetic. White ground, deep navy
+   accent, hairline structure, generous type scale.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Color */
+  --paper: #ffffff;
+  --stone: #f4f4f1;
+  --stone-deep: #ebeae5;
+  --ink: #0b0c0e;
+  --muted: #5c5c58;
+  --muted-2: #8b8b85;
+  --navy: #13294b;
+  --navy-tint: #eef1f6;
+  --navy-tint-2: #dde4ee;
+  --rule: #dedcd4;
+  --rule-strong: #c7c5bb;
+  --signal-pass: #1f6f4a;
+  --signal-pass-bg: #e9f3ee;
+  --signal-watch: #96660b;
+  --signal-watch-bg: #f8f0df;
+  --signal-fail: #a5382c;
+  --signal-fail-bg: #f7e9e6;
+
+  /* Type */
+  --font-display: 'Inter Tight', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'Roboto Mono', 'DM Mono', monospace;
+
+  /* Layout */
+  --maxw: 1180px;
+  --gutter: 28px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+img { max-width: 100%; display: block; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0;
+  color: var(--ink);
+}
+
+p { margin: 0; }
+
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow::before {
+  content: '';
+  width: 14px;
+  height: 1px;
+  background: var(--navy);
+}
+
+.section {
+  padding: 88px 0;
+  border-top: 1px solid var(--rule);
+}
+.section--stone {
+  background: var(--stone);
+}
+.section--navy {
+  background: var(--navy);
+  color: #fff;
+  border-top: none;
+}
+.section--navy h1, .section--navy h2, .section--navy h3 { color: #fff; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 22px;
+  border: 1px solid var(--navy);
+  transition: background 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--navy);
+  color: #fff;
+}
+.btn-primary:hover { background: #0d1e38; }
+.btn-secondary {
+  background: transparent;
+  color: var(--navy);
+}
+.btn-secondary:hover { background: var(--navy-tint); }
+.btn-on-navy {
+  border-color: rgba(255,255,255,0.5);
+  color: #fff;
+}
+.btn-on-navy:hover { background: rgba(255,255,255,0.1); }
+
+.rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+.kicker-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted-2);
+}
+
+.text-muted { color: var(--muted); }
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border: 1px solid var(--rule-strong);
+  color: var(--muted);
+  display: inline-block;
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  display: inline-block;
+}
+.chip-pass { background: var(--signal-pass-bg); color: var(--signal-pass); }
+.chip-watch { background: var(--signal-watch-bg); color: var(--signal-watch); }
+.chip-fail { background: var(--signal-fail-bg); color: var(--signal-fail); }
+
+/* Focus visibility */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--navy);
+  color: #fff;
+}

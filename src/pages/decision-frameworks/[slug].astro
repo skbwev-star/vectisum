@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleHero from '../../components/ArticleHero.astro';
+import DecisionTree from '../../components/DecisionTree.astro';
+import { decisionFrameworks } from '../../data/decisionFrameworks';
+
+export function getStaticPaths() {
+  return decisionFrameworks.map((d) => ({ params: { slug: d.slug }, props: { df: d } }));
+}
+const { df } = Astro.props;
+---
+<Layout
+  title={df.title}
+  description={df.dek}
+  path={`/decision-frameworks/${df.slug}`}
+>
+  <ArticleHero
+    eyebrow="Decision Framework"
+    title={df.title}
+    dek={df.dek}
+    backHref="/decision-frameworks"
+    backLabel="All Decision Frameworks"
+  />
+
+  <section class="section">
+    <div class="container narrow">
+      <p class="intro text-muted">{df.intro}</p>
+      <DecisionTree nodes={df.nodes} />
+      <div class="verdict-note">
+        <p>{df.verdictNote}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--stone cta-section">
+    <div class="container cta-inner">
+      <div>
+        <h2>Need this run on a specific deal?</h2>
+        <p class="text-muted">An independent review applies this exact logic against verified evidence.</p>
+      </div>
+      <a href="/contact" class="btn btn-primary">Commission a Review</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow { max-width: 760px; }
+  .intro { font-size: 15.5px; line-height: 1.75; margin-bottom: 32px; max-width: 68ch; }
+  .verdict-note { margin-top: 20px; padding: 18px 22px; background: var(--stone); border-left: 3px solid var(--navy); }
+  .verdict-note p { font-size: 14px; line-height: 1.6; }
+
+  .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .cta-inner h2 { font-size: 24px; margin-bottom: 8px; }
+</style>

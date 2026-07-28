@@ -1,0 +1,183 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import EditorialCard from '../../components/EditorialCard.astro';
+import { deals } from '../../data/deals';
+import { intelligenceNotes } from '../../data/intelligence';
+import { caseStudies } from '../../data/caseStudies';
+import { mistakes } from '../../data/mistakes';
+
+const featuredDeal = deals[0];
+const restDeals = deals.slice(1, 3);
+const latestNotes = intelligenceNotes.slice(0, 3);
+const featuredCase = caseStudies[0];
+const featuredMistakes = mistakes.slice(0, 3);
+---
+<Layout
+  title="Research"
+  description="Vectisum's research desk: deal autopsies, investment intelligence notes, structured case studies, and forensic research on why investors lose money — published as evidence, not marketing."
+  path="/research"
+>
+  <section class="hero-simple">
+    <div class="container">
+      <span class="eyebrow">Research</span>
+      <h1>Where the evidence lives.</h1>
+      <p class="hero-sub text-muted">
+        Deal autopsies, structured case studies, and short-form intelligence notes — a public, growing record of what
+        independent review actually finds.
+      </p>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Latest Deal Autopsy</span>
+      <div class="featured-grid">
+        <EditorialCard
+          href={`/deal-autopsies/${featuredDeal.slug}`}
+          kicker={featuredDeal.category}
+          title={featuredDeal.title}
+          dek={featuredDeal.summary}
+          size="large"
+          grade={featuredDeal.grade}
+          gradeState={featuredDeal.gradeState}
+        />
+        <div class="featured-side">
+          {restDeals.map((d) => (
+            <EditorialCard
+              href={`/deal-autopsies/${d.slug}`}
+              kicker={d.category}
+              title={d.title}
+              size="regular"
+              grade={d.grade}
+              gradeState={d.gradeState}
+            />
+          ))}
+        </div>
+      </div>
+      <a href="/deal-autopsies" class="link-more">All Deal Autopsies →</a>
+    </div>
+  </section>
+
+  <!-- RESEARCH TYPES -->
+  <section class="section section--stone">
+    <div class="container">
+      <span class="eyebrow">Research by Type</span>
+      <h2 class="section-title">Four ways this desk publishes evidence.</h2>
+      <div class="type-grid">
+        <a href="/deal-autopsies" class="type-card">
+          <h3>Deal Autopsies</h3>
+          <p class="text-muted">Anonymised, forensic reviews of completed engagements — where the numbers stopped adding up.</p>
+        </a>
+        <a href="/case-studies" class="type-card">
+          <h3>Case Studies</h3>
+          <p class="text-muted">Full independent reviews, structured end to end: thesis, risks, evidence, verdict.</p>
+        </a>
+        <a href="/investment-intelligence" class="type-card">
+          <h3>Investment Intelligence</h3>
+          <p class="text-muted">Short-form notes on transaction trends, developer behaviour, and policy change.</p>
+        </a>
+        <a href="/why-investors-lose-money" class="type-card">
+          <h3>Why Investors Lose Money</h3>
+          <p class="text-muted">Forensic research on the recurring mechanisms behind property investment losses.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY -->
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Featured Case Study</span>
+      <a href={`/case-studies/${featuredCase.slug}`} class="case-feature">
+        <div>
+          <span class="tag">{featuredCase.assetType}</span>
+          <h2>{featuredCase.title}</h2>
+          <p class="text-muted">{featuredCase.overview}</p>
+          <span class="link-more">Read the full case study →</span>
+        </div>
+        <div class="case-grade">
+          <span class:list={['chip', `chip-${featuredCase.gradeState}`]}>Grade {featuredCase.grade}</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- INTELLIGENCE NOTES -->
+  <section class="section section--stone">
+    <div class="container">
+      <span class="eyebrow">Latest Investment Intelligence</span>
+      <div class="note-list">
+        {latestNotes.map((n) => (
+          <a href={`/investment-intelligence/${n.slug}`} class="note-row">
+            <span class="tag">{n.category}</span>
+            <h3>{n.title}</h3>
+            <p class="text-muted">{n.dek}</p>
+          </a>
+        ))}
+      </div>
+      <a href="/investment-intelligence" class="link-more">All Investment Intelligence →</a>
+    </div>
+  </section>
+
+  <!-- MISTAKES -->
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">From Why Investors Lose Money</span>
+      <div class="mistake-list">
+        {featuredMistakes.map((m) => (
+          <a href={`/why-investors-lose-money/${m.slug}`} class="mistake-row">
+            <span class="mistake-num">{m.num}</span>
+            <div>
+              <h3>{m.title}</h3>
+              <p class="text-muted">{m.dek}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+      <a href="/why-investors-lose-money" class="link-more">Full Series →</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero-simple { padding: 56px 0 44px; border-bottom: 1px solid var(--rule); }
+  .hero-simple h1 { font-size: clamp(30px, 4.5vw, 46px); margin: 16px 0 18px; max-width: 18ch; }
+  .hero-sub { font-size: 16px; max-width: 56ch; line-height: 1.6; }
+
+  .section-title { font-size: clamp(24px, 3vw, 32px); margin: 14px 0 32px; }
+
+  .featured-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; margin: 20px 0 20px; }
+  .featured-side { display: flex; flex-direction: column; gap: 16px; }
+  .link-more { display: inline-block; margin-top: 10px; font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.04em; color: var(--navy); border-bottom: 1px solid var(--navy); padding-bottom: 2px; }
+
+  .type-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .type-card { background: var(--paper); padding: 26px 22px; }
+  .type-card h3 { font-size: 17px; margin-bottom: 10px; }
+  .type-card p { font-size: 13px; line-height: 1.55; }
+
+  .case-feature { display: flex; justify-content: space-between; align-items: center; gap: 24px; border: 1px solid var(--rule); padding: 34px; }
+  .case-feature:hover { border-color: var(--navy); }
+  .case-feature h2 { font-size: 26px; margin: 12px 0 10px; max-width: 24ch; }
+  .case-feature p { font-size: 14.5px; line-height: 1.6; max-width: 56ch; margin-bottom: 12px; }
+
+  .note-list { display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin: 20px 0 20px; }
+  .note-row { background: var(--paper); padding: 20px 24px; }
+  .note-row h3 { font-size: 16.5px; margin: 8px 0 6px; }
+  .note-row p { font-size: 13px; line-height: 1.55; }
+
+  .mistake-list { display: flex; flex-direction: column; margin: 20px 0 20px; }
+  .mistake-row { display: grid; grid-template-columns: 50px 1fr; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+  .mistake-row:first-child { padding-top: 0; }
+  .mistake-num { font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--rule-strong); }
+  .mistake-row h3 { font-size: 16.5px; margin-bottom: 6px; }
+  .mistake-row p { font-size: 13.5px; line-height: 1.5; }
+
+  @media (max-width: 980px) {
+    .featured-grid { grid-template-columns: 1fr; }
+    .type-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 700px) {
+    .case-feature { flex-direction: column; align-items: flex-start; }
+  }
+</style>

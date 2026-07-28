@@ -1,0 +1,28 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  dek: string;
+  num: string;
+}
+const { href, title, dek, num } = Astro.props as Props;
+---
+<a href={href} class="k-card">
+  <span class="k-num">{num}</span>
+  <h3 class="k-title">{title}</h3>
+  <p class="k-dek text-muted">{dek}</p>
+</a>
+
+<style>
+  .k-card {
+    display: block;
+    padding: 24px 22px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    transition: border-color 0.15s ease;
+  }
+  .k-card:hover { border-color: var(--navy); }
+  .k-num { font-family: var(--font-mono); font-size: 11px; color: var(--muted-2); }
+  .k-title { font-size: 17px; margin: 10px 0 8px; }
+  .k-dek { font-size: 13px; line-height: 1.55; }
+</style>

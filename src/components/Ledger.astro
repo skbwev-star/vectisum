@@ -1,0 +1,67 @@
+---
+interface Cell {
+  label: string;
+  value: string;
+  delta?: string;
+  state?: 'pass' | 'watch' | 'fail';
+}
+interface Props {
+  cells: Cell[];
+}
+const { cells } = Astro.props as Props;
+---
+<div class="ledger" role="img" aria-label="Illustrative verification ledger showing sample review metrics">
+  {cells.map((cell) => (
+    <div class="cell">
+      <div class="cell-label">{cell.label}</div>
+      <div class:list={['cell-value', cell.state && `is-${cell.state}`]}>{cell.value}</div>
+      {cell.delta && <div class="cell-delta">{cell.delta}</div>}
+    </div>
+  ))}
+</div>
+
+<style>
+  .ledger {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    border-top: 1px solid var(--rule-strong);
+    border-bottom: 1px solid var(--rule-strong);
+    overflow-x: auto;
+  }
+  .cell {
+    padding: 18px 22px;
+    border-right: 1px solid var(--rule);
+    min-width: 140px;
+  }
+  .cell:last-child { border-right: none; }
+  .cell-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    margin-bottom: 8px;
+    white-space: nowrap;
+  }
+  .cell-value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--ink);
+  }
+  .cell-value.is-pass { color: var(--signal-pass); }
+  .cell-value.is-watch { color: var(--signal-watch); }
+  .cell-value.is-fail { color: var(--signal-fail); }
+  .cell-delta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  @media (max-width: 800px) {
+    .ledger { grid-auto-flow: row; grid-auto-columns: unset; }
+    .cell { border-right: none; border-bottom: 1px solid var(--rule); }
+  }
+</style>

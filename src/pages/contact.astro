@@ -1,0 +1,129 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="Contact"
+  description="Commission an independent investment review. No sales call required — send the property and the question you need answered."
+  path="/contact"
+>
+  <section class="hero-simple">
+    <div class="container">
+      <span class="eyebrow">Contact</span>
+      <h1>Commission a review.</h1>
+      <p class="hero-sub text-muted">
+        Send the address, the price, and the question you actually need answered. A scoped proposal follows — no discovery call required
+        unless you want one.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-grid">
+      <form id="contact-form" class="contact-form">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="field">
+          <label for="org">Organisation <span class="optional">(optional)</span></label>
+          <input type="text" id="org" name="org" />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="field">
+          <label for="role">You are a</label>
+          <select id="role" name="role">
+            <option>Family office / wealth manager</option>
+            <option>International investor</option>
+            <option>Buyer's agent</option>
+            <option>Private bank / lender</option>
+            <option>Lawyer / accountant</option>
+            <option>Developer</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="property">Property or deal in question</label>
+          <textarea id="property" name="property" rows="3" placeholder="Address, price, developer, and the market"></textarea>
+        </div>
+        <div class="field">
+          <label for="question">What do you need answered?</label>
+          <textarea id="question" name="question" rows="4" required placeholder="e.g. Is the quoted yield real? Is the price defensible against closed comparables? Should this go to my investment committee?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary submit-btn">Send Request</button>
+        <p class="form-note text-muted">Submitting opens a pre-filled email in your mail client. Nothing is transmitted directly from this page.</p>
+      </form>
+
+      <aside class="contact-side">
+        <div class="side-block">
+          <div class="side-heading">Direct</div>
+          <a href="mailto:skbwev@gmail.com" class="side-link">skbwev@gmail.com</a>
+        </div>
+        <div class="side-block">
+          <div class="side-heading">Response time</div>
+          <p class="text-muted">Scoped proposals within one business day. Reviews typically delivered within 24–72 hours of engagement, depending on asset complexity.</p>
+        </div>
+        <div class="side-block">
+          <div class="side-heading">Independence</div>
+          <p class="text-muted">No commission, referral fee, or transactional interest in any property reviewed. Vectisum does not broker, source, or introduce.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const subject = encodeURIComponent(`Review request — ${data.get('name') || ''}`);
+    const bodyLines = [
+      `Name: ${data.get('name')}`,
+      `Organisation: ${data.get('org') || '—'}`,
+      `Email: ${data.get('email')}`,
+      `Role: ${data.get('role')}`,
+      '',
+      `Property / deal: ${data.get('property') || '—'}`,
+      '',
+      `Question: ${data.get('question')}`,
+    ];
+    const body = encodeURIComponent(bodyLines.join('\n'));
+    window.location.href = `mailto:skbwev@gmail.com?subject=${subject}&body=${body}`;
+  });
+</script>
+
+<style>
+  .hero-simple { padding: 64px 0 48px; border-bottom: 1px solid var(--rule); }
+  .hero-simple h1 { font-size: clamp(30px, 4.5vw, 46px); margin: 16px 0 18px; max-width: 18ch; }
+  .hero-sub { font-size: 16px; max-width: 54ch; line-height: 1.6; }
+
+  .contact-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 56px; align-items: start; }
+  .contact-form { display: flex; flex-direction: column; gap: 20px; }
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  .field label { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .optional { text-transform: none; letter-spacing: 0; }
+  input, select, textarea {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    padding: 12px 14px;
+    border: 1px solid var(--rule-strong);
+    background: var(--paper);
+    color: var(--ink);
+    resize: vertical;
+  }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--navy); outline-offset: 1px; border-color: var(--navy); }
+  .submit-btn { align-self: flex-start; border: none; margin-top: 4px; }
+  .form-note { font-size: 12px; margin-top: -8px; }
+
+  .contact-side { display: flex; flex-direction: column; gap: 30px; border: 1px solid var(--rule); padding: 28px; background: var(--stone); height: fit-content; }
+  .side-heading { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 8px; }
+  .side-link { font-family: var(--font-mono); font-size: 14px; color: var(--navy); }
+  .side-block p { font-size: 13.5px; line-height: 1.6; }
+
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+</style>

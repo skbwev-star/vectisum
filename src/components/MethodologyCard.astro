@@ -1,0 +1,36 @@
+---
+interface Props {
+  index: string;
+  name: string;
+  description: string;
+}
+const { index, name, description } = Astro.props as Props;
+---
+<div class="method-card">
+  <div class="method-index">{index}</div>
+  <h3 class="method-name">{name}</h3>
+  <p class="method-desc text-muted">{description}</p>
+</div>
+
+<style>
+  .method-card {
+    padding: 28px 26px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    height: 100%;
+  }
+  .method-index {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted-2);
+    margin-bottom: 18px;
+  }
+  .method-name {
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+  .method-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+</style>

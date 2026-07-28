@@ -1,0 +1,61 @@
+---
+interface Props {
+  grade?: string;
+  label?: string;
+}
+const { grade = 'B+', label = 'Decision Score' } = Astro.props as Props;
+
+// Map grade to an angle along a 220-degree arc (A -> far right, D -> far left)
+const gradeOrder = ['D', 'C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A'];
+const idx = Math.max(0, gradeOrder.indexOf(grade));
+const t = idx / (gradeOrder.length - 1);
+const startAngle = -110;
+const endAngle = 110;
+const angle = startAngle + t * (endAngle - startAngle);
+const rad = (angle - 90) * (Math.PI / 180);
+const cx = 130, cy = 130, r = 96;
+const needleX = cx + r * Math.cos(rad);
+const needleY = cy + r * Math.sin(rad);
+---
+<div class="dial-wrap">
+  <svg viewBox="0 0 260 170" class="dial" role="img" aria-label={`${label}: ${grade}`}>
+    <path d="M 34 130 A 96 96 0 0 1 226 130" fill="none" stroke="var(--rule-strong)" stroke-width="2" />
+    <path d="M 34 130 A 96 96 0 0 1 92 45" fill="none" stroke="var(--signal-fail)" stroke-width="4" opacity="0.55" />
+    <path d="M 92 45 A 96 96 0 0 1 168 45" fill="none" stroke="var(--signal-watch)" stroke-width="4" opacity="0.55" />
+    <path d="M 168 45 A 96 96 0 0 1 226 130" fill="none" stroke="var(--signal-pass)" stroke-width="4" opacity="0.55" />
+    <line x1={cx} y1={cy} x2={needleX} y2={needleY} stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" />
+    <circle cx={cx} cy={cy} r="5" fill="var(--navy)" />
+    <text x="34" y="150" font-family="Roboto Mono, monospace" font-size="9" fill="var(--muted-2)" letter-spacing="1">D</text>
+    <text x="212" y="150" font-family="Roboto Mono, monospace" font-size="9" fill="var(--muted-2)" letter-spacing="1">A</text>
+  </svg>
+  <div class="dial-readout">
+    <div class="dial-grade">{grade}</div>
+    <div class="dial-label">{label}</div>
+  </div>
+</div>
+
+<style>
+  .dial-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .dial { width: 220px; height: auto; }
+  .dial-readout { text-align: center; margin-top: -18px; }
+  .dial-grade {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 30px;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .dial-label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+</style>

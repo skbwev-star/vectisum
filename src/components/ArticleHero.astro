@@ -1,0 +1,29 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  dek?: string;
+  meta?: string;
+  backHref?: string;
+  backLabel?: string;
+}
+const { eyebrow, title, dek, meta, backHref, backLabel = 'Back' } = Astro.props as Props;
+---
+<section class="article-hero">
+  <div class="container">
+    {backHref && <a href={backHref} class="back-link">← {backLabel}</a>}
+    <span class="eyebrow">{eyebrow}</span>
+    <h1>{title}</h1>
+    {dek && <p class="dek text-muted">{dek}</p>}
+    {meta && <div class="meta text-muted">{meta}</div>}
+  </div>
+</section>
+
+<style>
+  .article-hero { padding: 56px 0 44px; border-bottom: 1px solid var(--rule); }
+  .back-link { font-family: var(--font-mono); font-size: 12px; color: var(--muted); display: inline-block; margin-bottom: 22px; }
+  .back-link:hover { color: var(--navy); }
+  h1 { font-size: clamp(28px, 4.4vw, 44px); margin: 16px 0 14px; max-width: 24ch; }
+  .dek { font-size: 16px; line-height: 1.6; max-width: 60ch; }
+  .meta { font-family: var(--font-mono); font-size: 12px; margin-top: 14px; }
+</style>

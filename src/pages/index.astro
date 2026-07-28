@@ -1,0 +1,225 @@
+---
+import Layout from '../layouts/Layout.astro';
+import EditorialCard from '../components/EditorialCard.astro';
+import StatStrip from '../components/StatStrip.astro';
+import DecisionDial from '../components/DecisionDial.astro';
+import { deals } from '../data/deals';
+import { knowledgeCategories } from '../data/knowledge';
+
+const featured = deals[0];
+const rest = deals.slice(1, 4);
+
+const stats = [
+  { value: '17', label: 'Knowledge Categories Published' },
+  { value: '07', label: 'Proprietary Verification Frameworks' },
+  { value: '190+', label: 'Jurisdictions Referenced' },
+  { value: '0', label: 'Commission Taken on Any Review' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Vectisum',
+  url: 'https://www.vectisum.com',
+  description: 'Independent investment review firm providing property investment verification and stress-testing before capital is committed.',
+  areaServed: 'Worldwide',
+};
+---
+<Layout
+  title="Independent Investment Review"
+  description="Vectisum independently verifies property investment decisions before capital is committed. Research, evidence, and verification — not brokerage."
+  path="/"
+  jsonLd={jsonLd}
+>
+  <!-- LATEST RESEARCH -->
+  <section class="research-hero">
+    <div class="container">
+      <div class="research-hero-top">
+        <span class="eyebrow">Latest Research</span>
+        <a href="/research" class="link-more">All Research →</a>
+      </div>
+      <div class="featured-grid">
+        <EditorialCard
+          href={`/deal-autopsies/${featured.slug}`}
+          kicker={featured.category}
+          title={featured.title}
+          dek={featured.summary}
+          size="large"
+          grade={featured.grade}
+          gradeState={featured.gradeState}
+        />
+        <div class="featured-side">
+          {rest.map((d) => (
+            <EditorialCard
+              href={`/deal-autopsies/${d.slug}`}
+              kicker={d.category}
+              title={d.title}
+              size="regular"
+              grade={d.grade}
+              gradeState={d.gradeState}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT VECTISUM IS -->
+  <section class="section intro-section">
+    <div class="container intro-grid">
+      <div>
+        <span class="eyebrow">Independent Investment Review</span>
+        <h1 class="intro-title">Vectisum does not sell property. Vectisum verifies investment decisions.</h1>
+        <p class="intro-sub text-muted">
+          Stress-testing cross-border property investments before capital is committed — independent of the broker, the
+          developer, and the deal. No commission. No introductions. No stake in whether a transaction closes.
+        </p>
+        <div class="intro-actions">
+          <a href="/sample-review" class="btn btn-primary">See a Real Investment Review</a>
+          <a href="/methodology" class="btn btn-secondary">How We Work</a>
+        </div>
+      </div>
+      <div class="intro-dial">
+        <DecisionDial grade="B+" label="Illustrative Decision Score" />
+        <p class="text-muted intro-dial-caption">Every review closes on one graded verdict — the figure a committee actually acts on.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REAL WORK -->
+  <section class="section section--stone">
+    <div class="container">
+      <span class="eyebrow">Research Published</span>
+      <StatStrip stats={stats} />
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="section">
+    <div class="container why-grid">
+      <div class="why-lead">
+        <span class="eyebrow">Why Independent Verification</span>
+        <h2>The jurisdiction may be right. The acquisition may still be wrong.</h2>
+      </div>
+      <div class="why-cols">
+        <div class="why-col">
+          <div class="kicker-num">The developer says</div>
+          <p>Guaranteed rental returns, projected yield on the launch price, absorption figures drawn from their own sales office.</p>
+        </div>
+        <div class="why-col">
+          <div class="kicker-num">The broker says</div>
+          <p>Strong upside, tight comparables, an offer that "won't last" — priced to move the transaction, not to protect the buyer.</p>
+        </div>
+        <div class="why-col why-col--navy">
+          <div class="kicker-num" style="color:rgba(255,255,255,0.6)">The evidence decides</div>
+          <p style="color:#fff">Closed transaction data, verified cost structures, and a stress-tested return — checked by a party with no stake in whether the deal closes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHODOLOGY TEASER -->
+  <section class="section section--stone">
+    <div class="container">
+      <span class="eyebrow">Methodology</span>
+      <h2 class="section-title">Seven frameworks. One verdict.</h2>
+      <p class="section-sub text-muted">Every review runs the same disciplined sequence, regardless of asset class or jurisdiction.</p>
+      <div class="method-strip">
+        <span>Property Snapshot™</span><span>Evidence Matrix™</span><span>True Cost Model™</span>
+        <span>Investment Performance Model™</span><span>Decision Score™</span><span>Scenario Planner™</span><span>Decision Dashboard™</span>
+      </div>
+      <a href="/methodology" class="link-more">Read the full methodology →</a>
+    </div>
+  </section>
+
+  <!-- KNOWLEDGE TEASER -->
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Knowledge Library</span>
+      <h2 class="section-title">A working reference, not a services page.</h2>
+      <p class="section-sub text-muted">{knowledgeCategories.length} categories on cross-border property investment, written as institutional research.</p>
+      <div class="knowledge-chip-row">
+        {knowledgeCategories.slice(0, 10).map((k) => (
+          <a href={`/knowledge/${k.slug}`} class="k-chip">{k.title}</a>
+        ))}
+      </div>
+      <a href="/knowledge" class="link-more">Browse the full library →</a>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section class="section section--navy who-section">
+    <div class="container">
+      <span class="eyebrow" style="color:rgba(255,255,255,0.7)">Who Reads This Research</span>
+      <h2 class="section-title">Built for the people responsible for the decision.</h2>
+      <div class="who-grid">
+        <div class="who-item"><h3>Family Offices</h3><p class="text-muted">Independent evidence before allocation, in a form the investment committee can act on.</p></div>
+        <div class="who-item"><h3>International Investors</h3><p class="text-muted">A second, disinterested opinion on a cross-border acquisition before capital leaves the account.</p></div>
+        <div class="who-item"><h3>Buyer's Agents</h3><p class="text-muted">Independent verification that protects the client relationship without exposing the agent to the underwriting.</p></div>
+        <div class="who-item"><h3>Private Banks</h3><p class="text-muted">Documented, defensible collateral verification for lending decisions involving cross-border property.</p></div>
+        <div class="who-item"><h3>Law Firms</h3><p class="text-muted">Financial verification to sit alongside legal due diligence, from a party with no transactional interest.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta-section">
+    <div class="container cta-inner">
+      <div>
+        <h2>Have a deal on the table?</h2>
+        <p class="text-muted">Send the address. The evidence decides before you commit capital.</p>
+      </div>
+      <a href="/contact" class="btn btn-primary">Commission a Review</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .research-hero { padding: 48px 0 0; }
+  .research-hero-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .featured-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; padding-bottom: 8px; }
+  .featured-side { display: flex; flex-direction: column; gap: 16px; }
+  .link-more { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.04em; color: var(--navy); border-bottom: 1px solid var(--navy); padding-bottom: 2px; }
+
+  .intro-section { border-top: 1px solid var(--rule); }
+  .intro-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; align-items: center; }
+  .intro-title { font-size: clamp(28px, 4.2vw, 44px); margin: 18px 0 20px; max-width: 20ch; line-height: 1.15; }
+  .intro-sub { font-size: 16px; max-width: 54ch; line-height: 1.65; margin-bottom: 30px; }
+  .intro-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .intro-dial { display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid var(--rule); padding: 32px 24px; background: var(--stone); }
+  .intro-dial-caption { font-size: 12.5px; margin-top: 12px; line-height: 1.5; }
+
+  .section-title { font-size: clamp(26px, 3.4vw, 38px); margin: 14px 0 12px; max-width: 24ch; }
+  .section-sub { font-size: 15px; max-width: 56ch; margin-bottom: 32px; }
+
+  .why-grid { display: grid; grid-template-columns: 0.9fr 2fr; gap: 48px; }
+  .why-lead h2 { font-size: clamp(24px, 3vw, 32px); margin-top: 14px; max-width: 14ch; }
+  .why-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .why-col { background: var(--paper); padding: 28px 24px; }
+  .why-col--navy { background: var(--navy); color: #fff; }
+  .why-col p { font-size: 14.5px; line-height: 1.6; margin-top: 10px; color: var(--muted); }
+
+  .method-strip { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+  .method-strip span { font-family: var(--font-mono); font-size: 12px; border: 1px solid var(--rule-strong); padding: 8px 14px; background: var(--paper); }
+
+  .knowledge-chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+  .k-chip { font-family: var(--font-mono); font-size: 12px; border: 1px solid var(--rule-strong); padding: 8px 14px; color: var(--navy); }
+  .k-chip:hover { background: var(--navy-tint); }
+
+  .who-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.15); margin-top: 12px; }
+  .who-item { background: var(--navy); padding: 26px 20px; }
+  .who-item h3 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+  .who-item p { font-size: 13px; line-height: 1.55; color: rgba(255,255,255,0.65) !important; }
+
+  .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .cta-inner h2 { font-size: 26px; margin-bottom: 8px; }
+
+  @media (max-width: 980px) {
+    .featured-grid { grid-template-columns: 1fr; }
+    .intro-grid { grid-template-columns: 1fr; }
+    .intro-dial { order: -1; }
+    .why-grid { grid-template-columns: 1fr; }
+    .why-cols { grid-template-columns: 1fr; }
+    .who-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

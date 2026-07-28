@@ -1,0 +1,47 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleHero from '../../components/ArticleHero.astro';
+import { intelligenceNotes } from '../../data/intelligence';
+
+export function getStaticPaths() {
+  return intelligenceNotes.map((n) => ({ params: { slug: n.slug }, props: { note: n } }));
+}
+const { note } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: note.title,
+  description: note.dek,
+  datePublished: note.published,
+  author: { '@type': 'Organization', name: 'Vectisum' },
+  publisher: { '@type': 'Organization', name: 'Vectisum' },
+};
+---
+<Layout
+  title={note.title}
+  description={note.dek}
+  path={`/investment-intelligence/${note.slug}`}
+  type="article"
+  jsonLd={jsonLd}
+>
+  <ArticleHero
+    eyebrow={note.category}
+    title={note.title}
+    dek={note.dek}
+    meta={new Date(note.published).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}
+    backHref="/investment-intelligence"
+    backLabel="Investment Intelligence"
+  />
+
+  <section class="section">
+    <div class="container narrow">
+      {note.paragraphs.map((p) => <p class="body-p text-muted">{p}</p>)}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow { max-width: 680px; }
+  .body-p { font-size: 15.5px; line-height: 1.75; margin-bottom: 18px; }
+</style>

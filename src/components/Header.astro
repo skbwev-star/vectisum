@@ -1,0 +1,230 @@
+---
+const research = [
+  { href: '/deal-autopsies', label: 'Deal Autopsies', desc: 'Anonymised forensic reviews of completed deals' },
+  { href: '/investment-intelligence', label: 'Investment Intelligence', desc: 'Short-form research notes and market observations' },
+  { href: '/case-studies', label: 'Case Studies', desc: 'Full independent reviews, structured end to end' },
+  { href: '/why-investors-lose-money', label: 'Why Investors Lose Money', desc: 'Forensic research on recurring loss patterns' },
+  { href: '/decision-frameworks', label: 'Decision Frameworks', desc: 'Structured trees for the calls investors actually face' },
+];
+
+const nav = [
+  { href: '/research', label: 'Research', dropdown: research },
+  { href: '/methodology', label: 'Methodology' },
+  { href: '/knowledge', label: 'Knowledge' },
+  { href: '/sample-review', label: 'Sample Review' },
+  { href: '/about', label: 'About' },
+];
+const path = Astro.url.pathname;
+const inResearch = research.some((r) => path.startsWith(r.href)) || path.startsWith('/research');
+---
+<header class="site-header">
+  <div class="bar">
+    <div class="container bar-inner">
+      <span>Independent Investment Review</span>
+      <span class="bar-sep">·</span>
+      <span>190+ Jurisdictions Referenced</span>
+      <span class="bar-sep">·</span>
+      <span>No Transaction Stake</span>
+    </div>
+  </div>
+  <div class="container nav-row">
+    <a href="/" class="wordmark">
+      <span class="wordmark-mark" aria-hidden="true">V</span>
+      <span class="wordmark-text">VECTISUM</span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      {nav.map((item) => (
+        item.dropdown ? (
+          <div class="nav-item-dropdown">
+            <a href={item.href} class:list={['nav-link', { active: inResearch }]}>{item.label}<span class="caret">⌄</span></a>
+            <div class="dropdown-panel">
+              {item.dropdown.map((d) => (
+                <a href={d.href} class="dropdown-link">
+                  <span class="dropdown-link-label">{d.label}</span>
+                  <span class="dropdown-link-desc">{d.desc}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a href={item.href} class:list={['nav-link', { active: path === item.href || path.startsWith(item.href + '/') }]}>
+            {item.label}
+          </a>
+        )
+      ))}
+    </nav>
+    <a href="/contact" class="btn btn-primary nav-cta">Commission a Review</a>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" id="menu-toggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile">
+    {nav.map((item) => (
+      <a href={item.href}>{item.label}</a>
+    ))}
+    {research.map((d) => <a href={d.href} class="mobile-sub">{d.label}</a>)}
+    <a href="/contact" class="mobile-cta">Commission a Review</a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+  }
+  .bar {
+    background: var(--navy);
+    color: rgba(255,255,255,0.82);
+  }
+  .bar-inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 7px var(--gutter);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .bar-sep { opacity: 0.4; }
+
+  .nav-row {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    padding: 18px var(--gutter);
+  }
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: auto;
+  }
+  .wordmark-mark {
+    width: 30px;
+    height: 30px;
+    background: var(--navy);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+  }
+  .wordmark-text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.06em;
+  }
+  .main-nav {
+    display: flex;
+    gap: 28px;
+  }
+  .nav-item-dropdown { position: relative; }
+  .nav-item-dropdown:hover .dropdown-panel,
+  .nav-item-dropdown:focus-within .dropdown-panel {
+    display: flex;
+  }
+  .caret { font-size: 10px; margin-left: 4px; opacity: 0.6; }
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+  }
+  .nav-link:hover, .nav-link.active {
+    color: var(--navy);
+    border-bottom-color: var(--navy);
+  }
+  .dropdown-panel {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: calc(100% + 18px);
+    left: -18px;
+    width: 320px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    box-shadow: 0 12px 28px rgba(11,12,14,0.08);
+    padding: 8px;
+    z-index: 60;
+  }
+  .dropdown-link {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 11px 14px;
+  }
+  .dropdown-link:hover { background: var(--stone); }
+  .dropdown-link-label { font-family: var(--font-display); font-weight: 600; font-size: 13.5px; color: var(--ink); }
+  .dropdown-link-desc { font-size: 11.5px; color: var(--muted-2); }
+
+  .nav-cta { white-space: nowrap; }
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+  }
+  .menu-toggle span {
+    width: 20px;
+    height: 1.5px;
+    background: var(--ink);
+  }
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    border-top: 1px solid var(--rule);
+    padding: 8px var(--gutter) 20px;
+  }
+  .mobile-nav a {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink);
+  }
+  .mobile-nav a.mobile-sub {
+    padding-left: 16px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-cta {
+    margin-top: 12px;
+    text-align: center;
+    background: var(--navy);
+    color: #fff;
+    padding: 12px;
+    border-bottom: none !important;
+  }
+
+  @media (max-width: 980px) {
+    .main-nav, .nav-cta { display: none; }
+    .menu-toggle { display: flex; }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-nav');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+</script>

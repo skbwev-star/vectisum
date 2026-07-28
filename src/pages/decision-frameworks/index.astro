@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleHero from '../../components/ArticleHero.astro';
+import { decisionFrameworks } from '../../data/decisionFrameworks';
+---
+<Layout
+  title="Decision Frameworks"
+  description="Structured decision trees for the calls cross-border property investors actually face: buy, walk away, renegotiate, hold, exit, diversify, or finance."
+  path="/decision-frameworks"
+>
+  <ArticleHero
+    eyebrow="Decision Frameworks"
+    title="The questions investors actually face, ordered."
+    dek="Not general advice. A structured sequence of checks for each specific decision point — the same logic this desk applies inside every review."
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="df-grid">
+        {decisionFrameworks.map((d) => (
+          <a href={`/decision-frameworks/${d.slug}`} class="df-card">
+            <h2>{d.title}</h2>
+            <p class="text-muted">{d.dek}</p>
+            <span class="df-link">View the framework →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .df-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .df-card { display: block; padding: 26px; border: 1px solid var(--rule); background: var(--paper); transition: border-color 0.15s ease; }
+  .df-card:hover { border-color: var(--navy); }
+  .df-card h2 { font-size: 21px; margin-bottom: 10px; }
+  .df-card p { font-size: 13.5px; line-height: 1.6; margin-bottom: 14px; }
+  .df-link { font-family: var(--font-mono); font-size: 11.5px; color: var(--navy); }
+  @media (max-width: 700px) { .df-grid { grid-template-columns: 1fr; } }
+</style>

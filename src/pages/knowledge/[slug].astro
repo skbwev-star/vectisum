@@ -1,0 +1,65 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleHero from '../../components/ArticleHero.astro';
+import { knowledgeCategories } from '../../data/knowledge';
+
+export function getStaticPaths() {
+  return knowledgeCategories.map((k) => ({ params: { slug: k.slug }, props: { cat: k } }));
+}
+const { cat } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: cat.title,
+  description: cat.dek,
+  author: { '@type': 'Organization', name: 'Vectisum' },
+  publisher: { '@type': 'Organization', name: 'Vectisum' },
+};
+---
+<Layout
+  title={cat.title}
+  description={cat.dek}
+  path={`/knowledge/${cat.slug}`}
+  type="article"
+  jsonLd={jsonLd}
+>
+  <ArticleHero
+    eyebrow="Knowledge"
+    title={cat.title}
+    dek={cat.dek}
+    backHref="/knowledge"
+    backLabel="Knowledge Library"
+  />
+
+  <section class="section">
+    <div class="container narrow">
+      {cat.sections.map((s) => (
+        <div class="k-section">
+          <h2>{s.heading}</h2>
+          {s.paragraphs.map((p) => <p class="text-muted">{p}</p>)}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--stone cta-section">
+    <div class="container cta-inner">
+      <div>
+        <h2>See this applied in an independent review.</h2>
+        <p class="text-muted">The methodology library shows exactly how this is checked, step by step.</p>
+      </div>
+      <a href="/methodology" class="btn btn-primary">View Methodology</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow { max-width: 700px; }
+  .k-section { margin-bottom: 40px; }
+  .k-section h2 { font-size: 21px; margin-bottom: 14px; }
+  .k-section p { font-size: 15px; line-height: 1.75; margin-bottom: 14px; }
+
+  .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .cta-inner h2 { font-size: 24px; margin-bottom: 8px; }
+</style>

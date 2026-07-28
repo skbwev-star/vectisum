@@ -1,0 +1,70 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleHero from '../../components/ArticleHero.astro';
+import { mistakes } from '../../data/mistakes';
+
+export function getStaticPaths() {
+  return mistakes.map((m) => ({ params: { slug: m.slug }, props: { mistake: m } }));
+}
+const { mistake } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: mistake.title,
+  description: mistake.dek,
+  author: { '@type': 'Organization', name: 'Vectisum' },
+  publisher: { '@type': 'Organization', name: 'Vectisum' },
+};
+---
+<Layout
+  title={mistake.title}
+  description={mistake.dek}
+  path={`/why-investors-lose-money/${mistake.slug}`}
+  type="article"
+  jsonLd={jsonLd}
+>
+  <ArticleHero
+    eyebrow={`Why Investors Lose Money · ${mistake.num} of 08`}
+    title={mistake.title}
+    dek={mistake.dek}
+    backHref="/why-investors-lose-money"
+    backLabel="Full Series"
+  />
+
+  <section class="section">
+    <div class="container narrow">
+      {mistake.paragraphs.map((p) => <p class="body-p text-muted">{p}</p>)}
+
+      <div class="lessons-box">
+        <div class="lessons-heading">Key Lessons</div>
+        <ul class="lessons-list">
+          {mistake.keyLessons.map((l) => <li>{l}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--stone cta-section">
+    <div class="container cta-inner">
+      <div>
+        <h2>See this pattern checked in practice.</h2>
+        <p class="text-muted">Every review runs the same evidence-based check against this exact failure mode.</p>
+      </div>
+      <a href="/sample-review" class="btn btn-primary">See the Sample Review</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow { max-width: 700px; }
+  .body-p { font-size: 15.5px; line-height: 1.75; margin-bottom: 18px; }
+  .lessons-box { border: 1px solid var(--rule); background: var(--stone); padding: 26px 28px; margin-top: 20px; }
+  .lessons-heading { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); margin-bottom: 16px; }
+  .lessons-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+  .lessons-list li { font-size: 14.5px; line-height: 1.6; padding-left: 22px; position: relative; }
+  .lessons-list li::before { content: '—'; position: absolute; left: 0; color: var(--navy); }
+
+  .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .cta-inner h2 { font-size: 24px; margin-bottom: 8px; }
+</style>

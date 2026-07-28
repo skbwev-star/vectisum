@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="About"
+  description="Why Vectisum exists: the conflicts of interest built into traditional property transactions, and why independence changes the outcome for the buyer."
+  path="/about"
+>
+  <section class="hero-simple">
+    <div class="container">
+      <span class="eyebrow">About</span>
+      <h1>Why independent verification exists.</h1>
+      <p class="hero-sub text-muted">Every party in a typical property transaction is paid when the deal closes. Vectisum is the exception.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow">
+      <p class="lead">In most cross-border property transactions, everyone advising the buyer has an interest in the transaction happening.</p>
+      <p class="text-muted">
+        The developer is selling inventory. The broker earns commission on completion, regardless of whether the price is fair. The
+        relocation consultant is often paid a referral fee by the agent they introduce. Even a well-intentioned advisor operating inside
+        that structure is, at some level, incentivised toward "yes."
+      </p>
+      <p class="text-muted">
+        None of this makes any of those parties dishonest. It means their incentives are not aligned with the single question that
+        actually matters to the buyer: <em>is this specific acquisition, at this specific price, a good investment?</em>
+      </p>
+
+      <h2 class="section-h2">A different structure</h2>
+      <p class="text-muted">
+        Vectisum does not sell property, broker transactions, or introduce buyers to sellers. We are commissioned to answer one question,
+        independent of whether the answer helps the transaction close. We hold no position, take no commission, and have no relationship
+        with the developer, the seller, or the broker on any deal we review.
+      </p>
+      <p class="text-muted">
+        This is a structural choice, not a marketing claim. It is also why some of our reviews conclude with a recommendation to walk
+        away — an outcome no party paid on commission has an incentive to reach.
+      </p>
+
+      <h2 class="section-h2">Who this is for</h2>
+      <p class="text-muted">
+        Family offices allocating across jurisdictions. International investors and second-home buyers without an in-house underwriting
+        function. Buyer's agents who want independent evidence they can hand to a client without absorbing the underwriting risk
+        themselves. Private banks assessing collateral. Law firms who want financial verification to sit alongside their own legal
+        due diligence.
+      </p>
+      <p class="text-muted">
+        We are not a fit for institutional funds with in-house appraisal teams, or for anyone looking for deal sourcing, brokerage,
+        or introductions — that is a different business, deliberately not this one.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--stone">
+    <div class="container founder-row">
+      <div class="founder-portrait" aria-hidden="true">
+        <span>SO</span>
+      </div>
+      <div>
+        <span class="eyebrow">Founder</span>
+        <h2 class="founder-name">Svetlana Olenchuk</h2>
+        <p class="text-muted founder-bio">
+          Svetlana founded Vectisum on a simple premise: that a property investment decision deserves the same independent
+          scrutiny as any other significant capital allocation, delivered by someone with no stake in whether the transaction
+          closes. She works across UAE, Cyprus, the UK, continental Europe, and the US, reviewing acquisitions before capital
+          is committed.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <div class="container cta-inner">
+      <div>
+        <h2>Have a deal to verify?</h2>
+        <p class="text-muted">We'll tell you what the evidence says — even when that means telling you not to buy.</p>
+      </div>
+      <a href="/contact" class="btn btn-primary">Commission a Review</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero-simple { padding: 64px 0 48px; border-bottom: 1px solid var(--rule); }
+  .hero-simple h1 { font-size: clamp(30px, 4.5vw, 46px); margin: 16px 0 18px; max-width: 20ch; }
+  .hero-sub { font-size: 16px; max-width: 56ch; line-height: 1.6; }
+
+  .narrow { max-width: 700px; }
+  .lead { font-family: var(--font-display); font-size: 24px; font-weight: 600; line-height: 1.4; margin-bottom: 24px; }
+  .narrow p.text-muted { font-size: 15.5px; line-height: 1.75; margin-bottom: 18px; }
+  .section-h2 { font-size: 22px; margin: 40px 0 16px; }
+
+  .founder-row { display: grid; grid-template-columns: 140px 1fr; gap: 36px; align-items: start; }
+  .founder-portrait { width: 140px; height: 140px; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 32px; }
+  .founder-name { font-size: 26px; margin: 14px 0 12px; }
+  .founder-bio { font-size: 15px; line-height: 1.7; max-width: 60ch; }
+
+  .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .cta-inner h2 { font-size: 24px; margin-bottom: 8px; }
+
+  @media (max-width: 700px) {
+    .founder-row { grid-template-columns: 1fr; }
+  }
+</style>

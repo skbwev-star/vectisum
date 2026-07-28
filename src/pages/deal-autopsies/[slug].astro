@@ -1,0 +1,97 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Ledger from '../../components/Ledger.astro';
+import { deals } from '../../data/deals';
+
+export function getStaticPaths() {
+  return deals.map((deal) => ({
+    params: { slug: deal.slug },
+    props: { deal },
+  }));
+}
+
+const { deal } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: deal.title,
+  description: deal.summary,
+  datePublished: deal.published,
+  author: { '@type': 'Organization', name: 'Vectisum' },
+  publisher: { '@type': 'Organization', name: 'Vectisum' },
+};
+---
+<Layout
+  title={deal.title}
+  description={deal.summary}
+  path={`/deal-autopsies/${deal.slug}`}
+  type="article"
+  jsonLd={jsonLd}
+>
+  <article>
+    <section class="hero-simple">
+      <div class="container">
+        <a href="/deal-autopsies" class="back-link">← All Deal Autopsies</a>
+        <div class="hero-meta">
+          <span class="tag">{deal.category}</span>
+          <span class:list={['chip', `chip-${deal.gradeState}`]}>Grade {deal.grade}</span>
+          <time class="text-muted hero-date">{new Date(deal.published).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+        </div>
+        <h1>{deal.title}</h1>
+        <p class="hero-sub text-muted">{deal.market}</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <Ledger cells={deal.ledger} />
+        <div class="body-cols">
+          {deal.body.map((block) => (
+            <div class="body-block">
+              <h2>{block.heading}</h2>
+              {block.paragraphs.map((p) => <p class="text-muted">{p}</p>)}
+              {block.list && (
+                <ul class="detail-list">
+                  {block.list.map((item) => <li>{item}</li>)}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-section">
+      <div class="container cta-inner">
+        <div>
+          <h2>Have a deal that needs the same treatment?</h2>
+          <p class="text-muted">Send the address. We'll tell you what the evidence says.</p>
+        </div>
+        <a href="/contact" class="btn btn-primary">Commission a Review</a>
+      </div>
+    </section>
+  </article>
+</Layout>
+
+<style>
+  .hero-simple { padding: 48px 0 40px; border-bottom: 1px solid var(--rule); }
+  .back-link { font-family: var(--font-mono); font-size: 12px; color: var(--muted); display: inline-block; margin-bottom: 24px; }
+  .back-link:hover { color: var(--navy); }
+  .hero-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+  .hero-date { font-family: var(--font-mono); font-size: 12px; }
+  h1 { font-size: clamp(28px, 4.4vw, 44px); max-width: 22ch; margin-bottom: 10px; }
+  .hero-sub { font-family: var(--font-mono); font-size: 13px; }
+
+  .body-cols { max-width: 720px; margin-top: 40px; }
+  .body-block { margin-bottom: 44px; }
+  .body-block h2 { font-size: 22px; margin-bottom: 14px; }
+  .body-block p { font-size: 15.5px; line-height: 1.7; margin-bottom: 14px; }
+  .detail-list { margin: 18px 0 0; padding: 0; list-style: none; border: 1px solid var(--rule); }
+  .detail-list li { padding: 12px 18px; border-bottom: 1px solid var(--rule); font-size: 13.5px; position: relative; padding-left: 34px; }
+  .detail-list li:last-child { border-bottom: none; }
+  .detail-list li::before { content: '—'; position: absolute; left: 14px; color: var(--navy); }
+
+  .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .cta-inner h2 { font-size: 24px; margin-bottom: 8px; }
+</style>

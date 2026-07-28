@@ -1,0 +1,60 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleHero from '../../components/ArticleHero.astro';
+import { mistakes } from '../../data/mistakes';
+---
+<Layout
+  title="Why Investors Lose Money"
+  description="Forensic research on the recurring patterns behind property investment losses — yield mispricing, guaranteed return schemes, service charge traps, exit liquidity gaps, and more."
+  path="/why-investors-lose-money"
+>
+  <ArticleHero
+    eyebrow="Flagship Research Series"
+    title="Why investors lose money on property."
+    dek="Not motivational content. A working index of the specific, recurring mechanisms by which a defensible-looking property investment turns into a poor one, drawn from patterns observed across completed reviews."
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="pattern-list">
+        {mistakes.map((m) => (
+          <a href={`/why-investors-lose-money/${m.slug}`} class="pattern-row">
+            <div class="pattern-num">{m.num}</div>
+            <div class="pattern-body">
+              <h2>{m.title}</h2>
+              <p class="text-muted">{m.dek}</p>
+              <span class="pattern-link">Read the research →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy cta-section">
+    <div class="container cta-inner">
+      <div>
+        <h2>Recognise one of these in a deal you're evaluating?</h2>
+        <p style="color:rgba(255,255,255,0.7)">That is exactly the kind of question an independent review is built to answer.</p>
+      </div>
+      <a href="/contact" class="btn btn-on-navy">Commission a Review</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .pattern-list { max-width: 820px; }
+  .pattern-row { display: grid; grid-template-columns: 70px 1fr; gap: 20px; padding: 32px 0; border-bottom: 1px solid var(--rule); }
+  .pattern-row:first-child { padding-top: 0; }
+  .pattern-num { font-family: var(--font-display); font-weight: 800; font-size: 26px; color: var(--rule-strong); }
+  .pattern-body h2 { font-size: 21px; margin-bottom: 10px; }
+  .pattern-body p { font-size: 14.5px; line-height: 1.7; margin-bottom: 10px; }
+  .pattern-link { font-family: var(--font-mono); font-size: 11.5px; color: var(--navy); }
+
+  .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .cta-inner h2 { font-size: 24px; margin-bottom: 8px; color: #fff; }
+
+  @media (max-width: 700px) {
+    .pattern-row { grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>

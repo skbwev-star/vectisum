@@ -1,0 +1,121 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleHero from '../../components/ArticleHero.astro';
+import { caseStudies } from '../../data/caseStudies';
+
+export function getStaticPaths() {
+  return caseStudies.map((c) => ({ params: { slug: c.slug }, props: { cs: c } }));
+}
+const { cs } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: cs.title,
+  description: cs.overview,
+  author: { '@type': 'Organization', name: 'Vectisum' },
+  publisher: { '@type': 'Organization', name: 'Vectisum' },
+};
+---
+<Layout
+  title={cs.title}
+  description={cs.overview}
+  path={`/case-studies/${cs.slug}`}
+  type="article"
+  jsonLd={jsonLd}
+>
+  <ArticleHero
+    eyebrow={cs.assetType}
+    title={cs.title}
+    dek={cs.market}
+    backHref="/case-studies"
+    backLabel="All Case Studies"
+  />
+
+  <section class="section">
+    <div class="container narrow">
+      <div class="grade-row">
+        <span class:list={['chip', `chip-${cs.gradeState}`, 'grade-chip']}>Decision Score: {cs.grade}</span>
+      </div>
+
+      <h2 class="h">Overview</h2>
+      <p class="text-muted body-p">{cs.overview}</p>
+
+      <h2 class="h">Investment Thesis</h2>
+      <p class="text-muted body-p">{cs.thesis}</p>
+
+      <h2 class="h">Risks</h2>
+      <div class="risk-list">
+        {cs.risks.map((r) => (
+          <div class="risk-item">
+            <div class="risk-label">{r.label}</div>
+            <p class="text-muted">{r.detail}</p>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="h">Evidence</h2>
+      <div class="evidence-table">
+        {cs.evidence.map((e) => (
+          <div class="evidence-row">
+            <span class="evidence-label text-muted">{e.label}</span>
+            <span class="evidence-value">{e.value}</span>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="h">Decision Framework Applied</h2>
+      <p class="text-muted body-p">{cs.decisionFramework}</p>
+
+      <h2 class="h">Lessons Learned</h2>
+      <ul class="lessons-list">
+        {cs.lessons.map((l) => <li>{l}</li>)}
+      </ul>
+
+      <h2 class="h">Investment Verdict</h2>
+      <div class="verdict-box">
+        <p>{cs.verdict}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--stone cta-section">
+    <div class="container cta-inner">
+      <div>
+        <h2>Have a deal that needs the same treatment?</h2>
+        <p class="text-muted">Send the address. We'll tell you what the evidence says.</p>
+      </div>
+      <a href="/contact" class="btn btn-primary">Commission a Review</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow { max-width: 720px; }
+  .grade-row { margin-bottom: 12px; }
+  .grade-chip { font-size: 12px; padding: 6px 14px; }
+  .h { font-size: 21px; margin: 40px 0 14px; }
+  .h:nth-of-type(1) { margin-top: 20px; }
+  .body-p { font-size: 15px; line-height: 1.75; }
+
+  .risk-list { display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .risk-item { background: var(--paper); padding: 18px 20px; }
+  .risk-label { font-family: var(--font-mono); font-size: 12px; color: var(--navy); margin-bottom: 6px; }
+  .risk-item p { font-size: 13.5px; line-height: 1.55; }
+
+  .evidence-table { border: 1px solid var(--rule); }
+  .evidence-row { display: flex; justify-content: space-between; padding: 13px 18px; border-bottom: 1px solid var(--rule); }
+  .evidence-row:last-child { border-bottom: none; }
+  .evidence-label { font-size: 13.5px; }
+  .evidence-value { font-family: var(--font-mono); font-weight: 600; font-size: 13.5px; }
+
+  .lessons-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+  .lessons-list li { font-size: 14.5px; line-height: 1.6; padding-left: 22px; position: relative; }
+  .lessons-list li::before { content: '—'; position: absolute; left: 0; color: var(--navy); }
+
+  .verdict-box { background: var(--navy-tint); border-left: 3px solid var(--navy); padding: 20px 24px; }
+  .verdict-box p { font-size: 15px; line-height: 1.65; font-weight: 500; }
+
+  .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .cta-inner h2 { font-size: 24px; margin-bottom: 8px; }
+</style>

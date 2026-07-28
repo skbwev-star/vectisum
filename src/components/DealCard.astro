@@ -1,0 +1,57 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  market: string;
+  category: string;
+  grade: string;
+  gradeState: 'pass' | 'watch' | 'fail';
+  summary: string;
+}
+const { slug, title, market, category, grade, gradeState, summary } = Astro.props as Props;
+---
+<a href={`/deal-autopsies/${slug}`} class="deal-card">
+  <div class="deal-card-top">
+    <span class="tag">{category}</span>
+    <span class:list={['chip', `chip-${gradeState}`]}>Grade {grade}</span>
+  </div>
+  <h3 class="deal-title">{title}</h3>
+  <p class="deal-market text-muted">{market}</p>
+  <p class="deal-summary text-muted">{summary}</p>
+  <span class="deal-link">Read the autopsy →</span>
+</a>
+
+<style>
+  .deal-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 26px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    transition: border-color 0.15s ease;
+    height: 100%;
+  }
+  .deal-card:hover { border-color: var(--navy); }
+  .deal-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+  .deal-title { font-size: 19px; }
+  .deal-market {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+  }
+  .deal-summary { font-size: 13.5px; line-height: 1.6; margin-top: 4px; }
+  .deal-link {
+    margin-top: auto;
+    padding-top: 12px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--navy);
+  }
+</style>

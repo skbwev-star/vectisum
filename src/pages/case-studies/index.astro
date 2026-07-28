@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleHero from '../../components/ArticleHero.astro';
+import { caseStudies } from '../../data/caseStudies';
+---
+<Layout
+  title="Case Studies"
+  description="Completed independent investment reviews, structured end to end — overview, thesis, risks, evidence, decision framework, lessons learned, and verdict."
+  path="/case-studies"
+>
+  <ArticleHero
+    eyebrow="Case Studies"
+    title="Completed independent reviews, structured end to end."
+    dek="No confidential client information is disclosed. Each case study follows the same structure: overview, thesis, risks, evidence, the decision framework applied, and the verdict reached."
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="cs-grid">
+        {caseStudies.map((c) => (
+          <a href={`/case-studies/${c.slug}`} class="cs-card">
+            <div class="cs-top">
+              <span class="tag">{c.assetType}</span>
+              <span class:list={['chip', `chip-${c.gradeState}`]}>Grade {c.grade}</span>
+            </div>
+            <h2>{c.title}</h2>
+            <p class="text-muted cs-market">{c.market}</p>
+            <p class="text-muted cs-overview">{c.overview}</p>
+            <span class="cs-link">Read the case study →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .cs-grid { display: flex; flex-direction: column; gap: 16px; }
+  .cs-card { display: block; padding: 30px; border: 1px solid var(--rule); background: var(--paper); transition: border-color 0.15s ease; }
+  .cs-card:hover { border-color: var(--navy); }
+  .cs-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .cs-card h2 { font-size: 24px; margin-bottom: 6px; }
+  .cs-market { font-family: var(--font-mono); font-size: 12px; margin-bottom: 12px; }
+  .cs-overview { font-size: 14.5px; line-height: 1.65; max-width: 70ch; }
+  .cs-link { display: inline-block; margin-top: 16px; font-family: var(--font-mono); font-size: 11.5px; color: var(--navy); }
+</style>
