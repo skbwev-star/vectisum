@@ -60,6 +60,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="side-block">
           <div class="side-heading">Direct</div>
           <a href="mailto:skbwev@gmail.com" class="side-link">skbwev@gmail.com</a>
+          <a href="https://www.linkedin.com/in/svetlana-olenchuk-b48304b1" target="_blank" rel="noopener noreferrer" class="side-link">LinkedIn ↗</a>
         </div>
         <div class="side-block">
           <div class="side-heading">Response time</div>
@@ -120,7 +121,8 @@ import Layout from '../layouts/Layout.astro';
 
   .contact-side { display: flex; flex-direction: column; gap: 30px; border: 1px solid var(--rule); padding: 28px; background: var(--stone); height: fit-content; }
   .side-heading { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 8px; }
-  .side-link { font-family: var(--font-mono); font-size: 14px; color: var(--navy); }
+  .side-link { display: block; font-family: var(--font-mono); font-size: 14px; color: var(--navy); margin-top: 6px; }
+  .side-link:first-of-type { margin-top: 0; }
   .side-block p { font-size: 13.5px; line-height: 1.6; }
 
   @media (max-width: 900px) {
