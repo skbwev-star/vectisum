@@ -17,11 +17,11 @@ const next = frameworks[idx + 1];
   path={`/methodology/${framework.slug}`}
 >
   <ArticleHero
-    eyebrow={`Methodology · ${framework.index} of 07`}
+    eyebrow={`The Lana Method · Stage ${framework.index} of ${String(frameworks.length).padStart(2, '0')}`}
     title={framework.name}
     dek={framework.oneLiner}
     backHref="/methodology"
-    backLabel="All Frameworks"
+    backLabel="All Stages"
   />
 
   <section class="section">

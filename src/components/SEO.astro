@@ -8,25 +8,25 @@ interface Props {
 }
 
 const { title, description, path = '/', type = 'website', jsonLd } = Astro.props;
-const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://www.vectisum.com';
+const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://www.lana-olenchuk.com';
 const canonical = `${site}${path}`;
 const ogImage = `${site}/og-default.svg`;
 
 const ldArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
-<title>{title} · Vectisum</title>
+<title>{title} · Lana</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
 
 <meta property="og:type" content={type} />
-<meta property="og:title" content={`${title} · Vectisum`} />
+<meta property="og:title" content={`${title} · Lana`} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={ogImage} />
-<meta property="og:site_name" content="Vectisum" />
+<meta property="og:site_name" content="Lana" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={`${title} · Vectisum`} />
+<meta name="twitter:title" content={`${title} · Lana`} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
 

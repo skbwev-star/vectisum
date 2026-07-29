@@ -92,7 +92,7 @@ export const knowledgeCategories: KnowledgeCategory[] = [
     dek: 'Why "yield" is not one number, and which version of it belongs in an investment decision.',
     sections: [
       { heading: 'Gross, net, and true net', paragraphs: [
-        'Gross yield divides advertised rent by asking price. Net yield deducts operating costs. True net yield — the figure used in a Vectisum review — additionally reconciles vacancy against realistic occupancy, verifies the rent figure against closed comparable evidence rather than an asking-rent estimate, and applies the actual service charge rather than a developer projection.',
+        'Gross yield divides advertised rent by asking price. Net yield deducts operating costs. True net yield — the figure used in a Lana Method review — additionally reconciles vacancy against realistic occupancy, verifies the rent figure against closed comparable evidence rather than an asking-rent estimate, and applies the actual service charge rather than a developer projection.',
       ]},
       { heading: 'Yield alone is an incomplete answer', paragraphs: [
         'A high true net yield in an illiquid, thinly-traded sub-market is a different risk profile than the same yield in a deep, liquid one. Yield and exit liquidity are read together, not separately.',
@@ -131,7 +131,7 @@ export const knowledgeCategories: KnowledgeCategory[] = [
     dek: 'Why a "comp" is only useful if it can be verified — and what makes one comparable stronger than another.',
     sections: [
       { heading: 'Closed transactions, not listings', paragraphs: [
-        'A listing price is an opening offer. A closed transaction is a fact. Comparable evidence used in a Vectisum review is drawn from verified closed transactions wherever available, with listing data used only to describe current market positioning, never to establish value.',
+        'A listing price is an opening offer. A closed transaction is a fact. Comparable evidence used in a Lana Method review is drawn from verified closed transactions wherever available, with listing data used only to describe current market positioning, never to establish value.',
       ]},
       { heading: 'What earns a high quality score', paragraphs: [
         'Recency, proximity, matching unit size and specification, and same-building or same-development weighting all raise the reliability of a given comparable. A comparable more than a year old, or from a materially different asset class, is treated as directional rather than decisive.',
@@ -144,7 +144,7 @@ export const knowledgeCategories: KnowledgeCategory[] = [
     dek: 'The difference between an asking price, a valuation, and a price an investor should actually be willing to pay.',
     sections: [
       { heading: 'Three different numbers', paragraphs: [
-        'The asking price is set by the seller\'s incentive to maximise proceeds. A valuation estimates fair market value based on comparable evidence. The investment offer price — the figure a Vectisum review produces — works backward from the investor\'s required return to the price that would actually deliver it. These three numbers are frequently different, and conflating them is a common source of overpayment.',
+        'The asking price is set by the seller\'s incentive to maximise proceeds. A valuation estimates fair market value based on comparable evidence. The investment offer price — the figure a Lana Method review produces — works backward from the investor\'s required return to the price that would actually deliver it. These three numbers are frequently different, and conflating them is a common source of overpayment.',
       ]},
     ],
   },
@@ -210,7 +210,7 @@ export const knowledgeCategories: KnowledgeCategory[] = [
     dek: 'Where financial verification sits alongside — and differs from — legal due diligence.',
     sections: [
       { heading: 'Two different disciplines', paragraphs: [
-        'Legal due diligence confirms title, encumbrances, and contractual enforceability. Financial and investment verification, which is what Vectisum performs, confirms whether the numbers behind the deal are real and whether the price is defensible against evidence. Both are necessary; neither substitutes for the other.',
+        'Legal due diligence confirms title, encumbrances, and contractual enforceability. Financial and investment verification, which is what the Lana Method performs, confirms whether the numbers behind the deal are real and whether the price is defensible against evidence. Both are necessary; neither substitutes for the other.',
       ]},
     ],
   },

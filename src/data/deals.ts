@@ -26,7 +26,7 @@ export const deals: Deal[] = [
       { label: 'Brochure Yield', value: '8.9%' },
       { label: 'Verified Net Yield', value: '6.1%', state: 'watch' },
       { label: 'Handover Slippage', value: '+14 mo', state: 'fail' },
-      { label: 'Decision Score', value: 'C', state: 'watch' },
+      { label: 'Verdict Grade', value: 'C', state: 'watch' },
     ],
     body: [
       {
@@ -71,7 +71,7 @@ export const deals: Deal[] = [
       { label: 'Advertised Return', value: '10% p.a.' },
       { label: 'Funding Source', value: 'Buyer Deposit', state: 'fail' },
       { label: 'Post-Guarantee Yield', value: '3.4%', state: 'fail' },
-      { label: 'Decision Score', value: 'D', state: 'fail' },
+      { label: 'Verdict Grade', value: 'D', state: 'fail' },
     ],
     body: [
       {
@@ -159,7 +159,7 @@ export const deals: Deal[] = [
       { label: 'Occupancy (Reported)', value: '96%' },
       { label: 'Concession-Adjusted', value: '89%', state: 'watch' },
       { label: 'Lease Rollover Risk', value: 'Elevated', state: 'watch' },
-      { label: 'Decision Score', value: 'B', state: 'pass' },
+      { label: 'Verdict Grade', value: 'B', state: 'pass' },
     ],
     body: [
       {

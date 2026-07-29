@@ -1,5 +1,5 @@
 /* ============================================================
-   VECTISUM — Design tokens
+   LANA — Design tokens
    Institutional research aesthetic. White ground, deep navy
    accent, hairline structure, generous type scale.
    ============================================================ */
@@ -17,6 +17,9 @@
   --navy: #13294b;
   --navy-tint: #eef1f6;
   --navy-tint-2: #dde4ee;
+  --gold: #c9a84c;
+  --gold-dark: #a8863d;
+  --ink-black: #0b0c0e;
   --rule: #dedcd4;
   --rule-strong: #c7c5bb;
   --signal-pass: #1f6f4a;
@@ -187,6 +190,63 @@ p { margin: 0; }
 a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
   outline: 2px solid var(--navy);
   outline-offset: 3px;
+}
+
+.tagline-box {
+  background: var(--ink-black);
+  border: 1px solid var(--gold);
+  padding: 22px 26px;
+  display: inline-block;
+}
+.tagline-box .line-1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.tagline-box .line-2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--gold);
+}
+
+.gold-eyebrow {
+  color: var(--gold-dark);
+}
+.gold-eyebrow::before {
+  background: var(--gold-dark);
+}
+
+.vsr-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+.vsr-item {
+  background: var(--paper);
+  padding: 22px 20px;
+  border-top: 3px solid var(--gold);
+}
+.vsr-item .vsr-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--gold-dark);
+  margin-bottom: 8px;
+  display: block;
+}
+.vsr-item h4 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.vsr-item p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted);
 }
 
 ::selection {

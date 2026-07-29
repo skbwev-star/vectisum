@@ -3,7 +3,7 @@ interface Props {
   grade?: string;
   label?: string;
 }
-const { grade = 'B+', label = 'Decision Score' } = Astro.props as Props;
+const { grade = 'B+', label = 'Verdict Grade' } = Astro.props as Props;
 
 // Map grade to an angle along a 220-degree arc (A -> far right, D -> far left)
 const gradeOrder = ['D', 'C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A'];
@@ -47,7 +47,7 @@ const needleY = cy + r * Math.sin(rad);
     font-family: var(--font-display);
     font-weight: 800;
     font-size: 30px;
-    color: var(--navy);
+    color: var(--gold-dark);
     line-height: 1;
   }
   .dial-label {

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.vectisum.com/sitemap-index.xml
+Sitemap: https://www.lana-olenchuk.com/sitemap-index.xml

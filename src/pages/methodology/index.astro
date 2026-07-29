@@ -6,26 +6,35 @@ import { frameworks } from '../../data/frameworks';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Vectisum Methodology',
+  name: 'The Lana Method',
   itemListElement: frameworks.map((f, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     name: f.name,
-    url: `https://www.vectisum.com/methodology/${f.slug}`,
+    url: `https://www.lana-olenchuk.com/methodology/${f.slug}`,
   })),
 };
 ---
 <Layout
   title="Methodology"
-  description="Seven proprietary frameworks used in every Vectisum independent investment review, from factual baseline to a single graded decision score."
+  description="The Lana Method: the real six-layer forensic risk audit — market screen, true net yield model, comparable analysis, stress test, risk register, and acquisition sequence."
   path="/methodology"
   jsonLd={jsonLd}
 >
   <ArticleHero
     eyebrow="Methodology"
-    title="Seven frameworks. Run in sequence. On every asset."
-    dek="This is the same process regardless of asset class, price point, or jurisdiction. It does not change to accommodate a deal we like."
+    title="The Lana Method. Six layers. One acquisition sequence."
+    dek="Verify. Stress-test. Replace. This is the same sequence run on every engagement, regardless of asset class or jurisdiction — a disclosed formula and a named risk, not a black-box score."
   />
+
+  <section class="section tagline-section">
+    <div class="container">
+      <div class="tagline-box">
+        <div class="line-1">I don't take sides.</div>
+        <div class="line-2">I take the truth.</div>
+      </div>
+    </div>
+  </section>
 
   <section class="section">
     <div class="container">
@@ -37,7 +46,7 @@ const jsonLd = {
               <h2>{f.name}</h2>
               <p class="step-lede">{f.oneLiner}</p>
               <p class="step-detail text-muted">{f.purpose}</p>
-              <span class="step-link">Read the framework →</span>
+              <span class="step-link">Read the stage →</span>
             </div>
           </a>
         ))}
@@ -59,7 +68,7 @@ const jsonLd = {
   <section class="section cta-section">
     <div class="container cta-inner">
       <div>
-        <h2>See the methodology applied to a real deal.</h2>
+        <h2>See the Method applied to a real deal.</h2>
         <p class="text-muted">Read a full sample review, section by section.</p>
       </div>
       <a href="/sample-review" class="btn btn-primary">See the Sample Review</a>
@@ -83,4 +92,6 @@ const jsonLd = {
 
   .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
   .cta-inner h2 { font-size: 26px; margin-bottom: 8px; }
+
+  .tagline-section { padding: 32px 0 0; border-top: none; }
 </style>

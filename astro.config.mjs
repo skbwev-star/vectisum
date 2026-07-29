@@ -3,6 +3,6 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://www.vectisum.com',
+  site: 'https://www.lana-olenchuk.com',
   integrations: [sitemap()],
 });

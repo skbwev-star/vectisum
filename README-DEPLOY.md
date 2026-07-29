@@ -1,4 +1,4 @@
-# Vectisum — Astro Project
+# Lana — Astro Project
 
 ## Local development
 npm install

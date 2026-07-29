@@ -11,23 +11,25 @@ const rest = deals.slice(1, 4);
 
 const stats = [
   { value: '17', label: 'Knowledge Categories Published' },
-  { value: '07', label: 'Proprietary Verification Frameworks' },
+  { value: '06', label: 'Layers in the Lana Method' },
   { value: '190+', label: 'Jurisdictions Referenced' },
   { value: '0', label: 'Commission Taken on Any Review' },
 ];
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Vectisum',
-  url: 'https://www.vectisum.com',
-  description: 'Independent investment review firm providing property investment verification and stress-testing before capital is committed.',
-  areaServed: 'Worldwide',
+  '@type': 'Person',
+  name: 'Svetlana (Lana) Olenchuk',
+  alternateName: 'Lana',
+  jobTitle: 'Independent Cross-Border Property Investment Analyst',
+  url: 'https://www.lana-olenchuk.com',
+  description: 'Independent cross-border property investment analyst providing verification and stress-testing of property investments before capital is committed, using the Lana Method.',
+  knowsAbout: ['Cross-border property investment', 'Real estate due diligence', 'Investment verification', 'Rental yield analysis'],
 };
 ---
 <Layout
   title="Independent Investment Review"
-  description="Vectisum independently verifies property investment decisions before capital is committed. Research, evidence, and verification — not brokerage."
+  description="Lana independently verifies cross-border property investment decisions before capital is committed, using the Lana Method — research, evidence, and verification, not brokerage."
   path="/"
   jsonLd={jsonLd}
 >
@@ -64,24 +66,48 @@ const jsonLd = {
     </div>
   </section>
 
-  <!-- WHAT VECTISUM IS -->
+  <!-- WHO LANA IS -->
   <section class="section intro-section">
     <div class="container intro-grid">
       <div>
-        <span class="eyebrow">Independent Investment Review</span>
-        <h1 class="intro-title">Vectisum does not sell property. Vectisum verifies investment decisions.</h1>
+        <span class="eyebrow">Independent Cross-Border Property Investment Analyst</span>
+        <h1 class="intro-title">I don't sell property. I verify whether it's actually a good investment.</h1>
         <p class="intro-sub text-muted">
-          Stress-testing cross-border property investments before capital is committed — independent of the broker, the
-          developer, and the deal. No commission. No introductions. No stake in whether a transaction closes.
+          I'm Lana. I independently review cross-border property investments before capital is committed, using
+          a fixed process I call the Lana Method — no commission, no introductions, no stake in whether a
+          transaction closes.
         </p>
+        <div class="tagline-box">
+          <div class="line-1">I don't take sides.</div>
+          <div class="line-2">I take the truth.</div>
+        </div>
         <div class="intro-actions">
           <a href="/sample-review" class="btn btn-primary">See a Real Investment Review</a>
-          <a href="/methodology" class="btn btn-secondary">How We Work</a>
+          <a href="/methodology" class="btn btn-secondary">How I Work</a>
         </div>
       </div>
       <div class="intro-dial">
-        <DecisionDial grade="B+" label="Illustrative Decision Score" />
-        <p class="text-muted intro-dial-caption">Every review closes on one graded verdict — the figure a committee actually acts on.</p>
+        <DecisionDial grade="B+" label="Illustrative Verdict Grade" />
+        <p class="text-muted intro-dial-caption">Every review closes on one stated verdict and grade — reached through judgment applied to evidence, not a formula.</p>
+      </div>
+    </div>
+    <div class="container vsr-wrap">
+      <div class="vsr-strip">
+        <div class="vsr-item">
+          <span class="vsr-num">01 · VERIFY</span>
+          <h4>Verify</h4>
+          <p>I check the claim against a source before it enters any model — closed transactions, not brochures.</p>
+        </div>
+        <div class="vsr-item">
+          <span class="vsr-num">02 · STRESS-TEST</span>
+          <h4>Stress-Test</h4>
+          <p>Every asset is run through a combined downside scenario before it earns a pass — not just an upside case.</p>
+        </div>
+        <div class="vsr-item">
+          <span class="vsr-num">03 · REPLACE</span>
+          <h4>Replace</h4>
+          <p>If the deal doesn't hold up, I show you what would — the real alternative, not just a rejection.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -121,12 +147,12 @@ const jsonLd = {
   <!-- METHODOLOGY TEASER -->
   <section class="section section--stone">
     <div class="container">
-      <span class="eyebrow">Methodology</span>
-      <h2 class="section-title">Seven frameworks. One verdict.</h2>
+      <span class="eyebrow">The Lana Method</span>
+      <h2 class="section-title">Six layers. One acquisition sequence.</h2>
       <p class="section-sub text-muted">Every review runs the same disciplined sequence, regardless of asset class or jurisdiction.</p>
       <div class="method-strip">
-        <span>Property Snapshot™</span><span>Evidence Matrix™</span><span>True Cost Model™</span>
-        <span>Investment Performance Model™</span><span>Decision Score™</span><span>Scenario Planner™</span><span>Decision Dashboard™</span>
+        <span>10-Area Market Screen</span><span>True Net Yield Model</span><span>Live Comparable Analysis</span>
+        <span>Stress Test</span><span>Key Risk Register</span><span>Acquisition Sequence</span>
       </div>
       <a href="/methodology" class="link-more">Read the full methodology →</a>
     </div>
@@ -184,10 +210,12 @@ const jsonLd = {
   .intro-section { border-top: 1px solid var(--rule); }
   .intro-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; align-items: center; }
   .intro-title { font-size: clamp(28px, 4.2vw, 44px); margin: 18px 0 20px; max-width: 20ch; line-height: 1.15; }
-  .intro-sub { font-size: 16px; max-width: 54ch; line-height: 1.65; margin-bottom: 30px; }
+  .intro-sub { font-size: 16px; max-width: 54ch; line-height: 1.65; margin-bottom: 26px; }
   .intro-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .intro-grid .tagline-box { margin-bottom: 26px; }
   .intro-dial { display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid var(--rule); padding: 32px 24px; background: var(--stone); }
   .intro-dial-caption { font-size: 12.5px; margin-top: 12px; line-height: 1.5; }
+  .vsr-wrap { margin-top: 48px; }
 
   .section-title { font-size: clamp(26px, 3.4vw, 38px); margin: 14px 0 12px; max-width: 24ch; }
   .section-sub { font-size: 15px; max-width: 56ch; margin-bottom: 32px; }
